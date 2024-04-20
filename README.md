@@ -32,5 +32,5 @@ numactl --cpunodebind=0 --membind=0 python bench_softmax.py --label bert-large -
 
 ### Dependency
 ```
-pip install torch pandas matplotlib
+pip install torch pandas matplotlib tqdm
 ```
