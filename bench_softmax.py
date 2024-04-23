@@ -37,6 +37,9 @@ def parse_args():
     parser.add_argument('--maxlen', type=int, default=128,
                         help='softmax input length limit, benchmarking from from 2**3 to 2**(x) < length_limit, cannot be lower than 8')
     
+    parser.add_argument('--input_length', metavar='N', type=int, nargs='+',
+                    help='an optional list of target length for benchmark, will be combined with maxlen')
+    
     parser.add_argument('--nhead', type=int, default=16,
                         help='number of self-attention head. Default is 16 (bert-large).')
     
@@ -76,6 +79,10 @@ def main():
 
     assert args.maxlen >= 8, "--maxlen must be larger than or equal 8"
     bench_length_list = generate_length_list(args.maxlen)
+
+    if args.input_length is not None:
+        bench_length_list.extend(args.input_length)
+        bench_length_list = sorted(bench_length_list)
 
     if args.label is None:
         outlabel = datetime.now().strftime("%y%m%d_%H%M%S")
