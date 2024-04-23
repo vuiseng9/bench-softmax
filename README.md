@@ -2,10 +2,9 @@
 ### Run
 ```
 $ python bench_softmax.py --help
-usage: bench_softmax.py [-h] [--nwarmup NWARMUP] [--nloop NLOOP] [--batchsize BATCHSIZE] [--maxlen MAXLEN] [--nhead NHEAD] [--device {cpu,cuda}] [--datatype {fp32,fp16,bf16}]
-                        [--label LABEL]
+usage: bench_softmax.py [-h] [--nwarmup NWARMUP] [--nloop NLOOP] [--batchsize BATCHSIZE] [--maxlen MAXLEN] [--input_length N [N ...]] [--nhead NHEAD] [--device {cpu,cuda}] [--datatype {fp32,fp16,bf16}] [--label LABEL]
 
-Benchmarking script for performance testing.
+Benchmarking softmax.
 
 options:
   -h, --help            show this help message and exit
@@ -14,6 +13,8 @@ options:
   --batchsize BATCHSIZE
                         Number of benchmark cycles to run. Default is 1.
   --maxlen MAXLEN       softmax input length limit, benchmarking from from 2**3 to 2**(x) < length_limit, cannot be lower than 8
+  --input_length N [N ...]
+                        an optional list of target length for benchmark, will be combined with maxlen
   --nhead NHEAD         number of self-attention head. Default is 16 (bert-large).
   --device {cpu,cuda}   any of ['cpu', 'cuda']
   --datatype {fp32,fp16,bf16}

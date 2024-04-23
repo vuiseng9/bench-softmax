@@ -23,7 +23,7 @@ pause = partial(time.sleep, BREAKTIME)
 softmax_fn = partial(torch.nn.functional.softmax, dim=-1)
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Benchmarking script for performance testing.")
+    parser = argparse.ArgumentParser(description="Benchmarking softmax.")
     
     parser.add_argument('--nwarmup', type=int, default=10,
                         help='Number of warm-up cycles to run before the actual benchmark. Default is 10.')
