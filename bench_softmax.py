@@ -62,9 +62,9 @@ def bench_serial(n_calls, input_length, device, dtype):
             _ = softmax_fn(torch.randn(input_length, device=device, dtype=dtype))
 
 @timeit
-def bench_batch(bs, n_head, seq_len, device, dtype):
+def bench_batch(input_data):
     with torch.no_grad():
-        _ = softmax_fn(torch.randn(bs, n_head, seq_len, seq_len, device=device, dtype=dtype))
+        _ = softmax_fn(input_data)
 
 
 def main():
@@ -104,24 +104,27 @@ def main():
         entry_dict['seq_len'] = seq_len
         entry_dict['n_serial'] = n_softmax
 
-        print(f"[len: {seq_len}][Serial]: Warming up ...")
-        for _ in range(n_warmup):
-            bench_serial(n_softmax, softmax_len, device, dtype)
+        # print(f"[len: {seq_len}][Serial]: Warming up ...")
+        # for _ in range(n_warmup):
+        #     bench_serial(n_softmax, softmax_len, device, dtype)
 
-        for _ in tqdm(range(n_loop), desc=f"[len: {seq_len}][Serial][n_calls: {n_softmax}]: Benchmarking ..."):
-            serial_meter.update(bench_serial(n_softmax, softmax_len, device, dtype))
+        # for _ in tqdm(range(n_loop), desc=f"[len: {seq_len}][Serial][n_calls: {n_softmax}]: Benchmarking ..."):
+        #     serial_meter.update(bench_serial(n_softmax, softmax_len, device, dtype))
         
-        entry_dict['serial_latency'] = serial_meter.avg*1000
-        serial_meter.current_stats()
+        # entry_dict['serial_latency'] = serial_meter.avg*1000
+        entry_dict['serial_latency'] = -1
+        # serial_meter.current_stats()
         pause()
 
         # batch ---------------------------------------
         print(f"[len: {seq_len}][Batch]: Warming up ...")
+        input_data = torch.randn(bs, n_head, softmax_len, softmax_len, device=device, dtype=dtype)
+
         for _ in range(n_warmup):
-            bench_batch(bs, n_head, softmax_len, device, dtype)
+            bench_batch(input_data)
 
         for _ in tqdm(range(n_loop), desc=f"[len: {seq_len}][Batch][{bs}, {n_head}, {softmax_len}, {softmax_len}]: Benchmarking ..."):
-            batch_meter.update(bench_batch(bs, n_head, softmax_len, device, dtype))
+            batch_meter.update(bench_batch(input_data))
 
         entry_dict['batch_latency'] = batch_meter.avg*1000
         batch_meter.current_stats()
