@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<net name="Model0" version="11">
+	<layers>
+		<layer id="0" name="x" type="Parameter" version="opset1">
+			<data shape="1,16,1024,1024" element_type="bf16" />
+			<output>
+				<port id="0" precision="BF16" names="x">
+					<dim>1</dim>
+					<dim>16</dim>
+					<dim>1024</dim>
+					<dim>1024</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="1" name="__module.softmax/aten::softmax/Softmax" type="SoftMax" version="opset8">
+			<data axis="-1" />
+			<input>
+				<port id="0" precision="BF16">
+					<dim>1</dim>
+					<dim>16</dim>
+					<dim>1024</dim>
+					<dim>1024</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="BF16">
+					<dim>1</dim>
+					<dim>16</dim>
+					<dim>1024</dim>
+					<dim>1024</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="2" name="Result_7" type="Result" version="opset1">
+			<input>
+				<port id="0" precision="BF16">
+					<dim>1</dim>
+					<dim>16</dim>
+					<dim>1024</dim>
+					<dim>1024</dim>
+				</port>
+			</input>
+		</layer>
+	</layers>
+	<edges>
+		<edge from-layer="0" from-port="0" to-layer="1" to-port="0" />
+		<edge from-layer="1" from-port="1" to-layer="2" to-port="0" />
+	</edges>
+	<rt_info>
+		<Runtime_version value="2024.1.0-15008-f4afc983258-releases/2024/1" />
+		<conversion_parameters>
+			<framework value="pytorch" />
+			<is_python_object value="True" />
+		</conversion_parameters>
+	</rt_info>
+</net>

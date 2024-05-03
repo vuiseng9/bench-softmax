@@ -1,0 +1,6 @@
+layerName;execStatus;layerType;execType;realTime (ms);cpuTime (ms)
+x;Status.NOT_RUN;Parameter;unknown_BF16;0.000;0.000
+__module.softmax/aten::softmax/Softmax;Status.EXECUTED;Softmax;jit_avx512_BF16;0.259;0.259
+Result_7;Status.NOT_RUN;Result;unknown_BF16;0.000;0.000
+Total;;;;0.259;0.259
+

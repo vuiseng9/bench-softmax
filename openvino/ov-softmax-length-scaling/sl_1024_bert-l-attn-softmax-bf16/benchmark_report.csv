@@ -1,0 +1,33 @@
+Command line parameters
+-api;sync
+-niter;100
+-m;ovir_softmax_bf16/softmax.xml
+-shape;[1,16,1024,1024]
+-infer_precision;bf16
+-report_type;average_counters
+-report_folder;./ov-softmax-length-scaling/sl_1024_bert-l-attn-softmax-bf16
+
+Configuration setup
+topology;Model1
+target device;CPU
+API;sync
+inference_only;True
+precision;UNSPECIFIED
+batch size;1
+number of iterations;100
+number of parallel infer requests;1
+duration (ms);0
+
+Execution results
+read model time (ms);5.51
+reshape model time (ms);0.06
+compile model time (ms);39.55
+first inference time (ms);24.97
+total execution time (ms);2192.88
+total number of iterations;100
+latency (ms);6.13
+avg latency;7.57
+min latency;5.38
+max latency;12.70
+throughput;163.11
+

@@ -1,0 +1,6 @@
+layerName;execStatus;layerType;execType;realTime (ms);cpuTime (ms)
+x;Status.NOT_RUN;Parameter;unknown_FP32;0.000;0.000
+__module.softmax/aten::softmax/Softmax;Status.EXECUTED;Softmax;jit_avx512_FP32;1.075;1.075
+Result_1457;Status.NOT_RUN;Result;unknown_FP32;0.000;0.000
+Total;;;;1.075;1.075
+

@@ -1,0 +1,1 @@
+numactl --cpunodebind 1 --membind 1 benchmark_app -api sync -niter 100 -m ovir_softmax_bf16/softmax.xml -shape [1,16,4096,4096] -infer_precision bf16 -report_type average_counters -report_folder ./ov-softmax-length-scaling/sl_4096_bert-l-attn-softmax-bf16

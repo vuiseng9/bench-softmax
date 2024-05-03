@@ -1,0 +1,1 @@
+numactl --cpunodebind 1 --membind 1 benchmark_app -api sync -niter 100 -m ovir_softmax_fp32/softmax.xml -shape [1,16,8192,8192] -infer_precision bf16 -report_type average_counters -report_folder ./ov-softmax-length-scaling/sl_8192_bert-l-attn-softmax-f32
